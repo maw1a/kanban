@@ -1,6 +1,7 @@
 {
 	"name": "kanban",
 	"version": "0.1.0",
+	"homepage": "https://maw1a.github.io/kanban/",
 	"type": "module",
 	"private": true,
 	"dependencies": {
@@ -60,12 +61,14 @@
 		"@vitejs/plugin-react": "^5.0.4",
 		"@vitejs/plugin-react-swc": "^3.10.2",
 		"babel-plugin-react-compiler": "19.1.0-rc.3",
+		"gh-pages": "^6.3.0",
 		"react^18": "link:@types/react^18",
 		"typescript": "^5.9.2",
 		"vite": "6.3.5"
 	},
 	"scripts": {
 		"dev": "vite",
-		"build": "vite build"
+		"build": "vite build && echo \"kanban.maw1a.com\" > build/CNAME",
+		"deploy": "gh-pages -d build"
 	}
 }

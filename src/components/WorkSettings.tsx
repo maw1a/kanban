@@ -104,7 +104,7 @@ function DraggableColumn({
 			ref={(node) => {
 				drag(drop(node));
 			}}
-			className={`flex items-center gap-2 p-3 border rounded-lg cursor-move ${
+			className={`flex items-center gap-2 p-3 border rounded-lg cursor-grab active:cursor-grabbing ${
 				isDragging ? "opacity-50" : ""
 			}`}
 		>

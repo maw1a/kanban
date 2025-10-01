@@ -65,7 +65,7 @@ export function TaskCard({ task, onDelete, onEdit }: TaskCardProps) {
 			ref={(r) => {
 				drag(r);
 			}}
-			className={`group cursor-move bg-white border shadow-sm hover:shadow-md transition-shadow ${
+			className={`group cursor-grab active:cursor-grabbing bg-white border shadow-sm hover:shadow-md transition-shadow ${
 				isDragging ? "opacity-50" : ""
 			}`}
 		>
