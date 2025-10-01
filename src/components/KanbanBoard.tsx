@@ -41,6 +41,7 @@ const defaultWorkTiming: WorkTiming = {
 };
 
 export function KanbanBoard() {
+	const [loaded, setLoaded] = useState(false);
 	const [name, setName] = useState<string>("");
 	const [tasks, setTasks] = useState<Task[]>([]);
 	const [columns, setColumns] = useState<ColumnType[]>(defaultColumns);
@@ -52,6 +53,7 @@ export function KanbanBoard() {
 
 	// Load data from localStorage on mount
 	useEffect(() => {
+		setLoaded(false);
 		const savedName = loadFromStorage("users-name", "");
 		const savedTasks = loadFromStorage("kanban-tasks", []);
 		const savedColumns = loadFromStorage("kanban-columns", defaultColumns);
@@ -63,6 +65,9 @@ export function KanbanBoard() {
 		setColumns(savedColumns.value);
 		setWorkTiming(savedWorkTiming.value);
 		setLastNotificationDate(savedLastNotification.value);
+		setTimeout(() => {
+			setLoaded(true);
+		}, 500);
 	}, []);
 
 	// Save data to localStorage whenever it changes
@@ -198,10 +203,28 @@ export function KanbanBoard() {
 		<DndProvider backend={HTML5Backend}>
 			<div className="min-h-screen bg-gray-50 flex flex-col w-full">
 				<div className="p-8 mx-12">
+					<div className="flex justify-center pb-8">
+						<div
+							className={cn(
+								"transition-all hover:w-26 h-9 overflow-hidden relative ease-out duration-400",
+								loaded ? "w-9" : "w-26",
+							)}
+						>
+							<img
+								className="object-cover object-left h-full"
+								fetchPriority="high"
+								src={"/logo.svg"}
+								alt={"Kanban — by maw1a"}
+							/>
+						</div>
+					</div>
 					<div className="flex items-center justify-between">
 						<div>
 							<div className="flex w-full items-center gap-4">
-								<h1 className="relative text-2xl font-bold text-gray-900 before:content-['👋🏻'] before:absolute before:-left-2 before:top-0 before:-translate-x-full">
+								<h1
+									className="relative text-2xl font-bold text-gray-900 before:content-['👋🏼'] before:[transform-origin:70%_70%]
+        hover:before:animate-[wave_1.6s_ease-in-out_1] before:text-3xl before:absolute before:-left-2.5 before:-top-0.5 before:-translate-x-full"
+								>
 									Hey {name}
 								</h1>
 								<div
