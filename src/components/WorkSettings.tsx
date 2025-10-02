@@ -218,7 +218,7 @@ export function WorkSettings({
 				id: Date.now().toString(),
 				title: newColumnTitle.trim(),
 				color: newColumnColor,
-				icon: "Circle",
+				icon: newColumnIcon,
 			};
 			setLocalColumns([...localColumns, newColumn]);
 			setNewColumnTitle("");
@@ -358,6 +358,13 @@ export function WorkSettings({
 								</div>
 							</div>
 						</div>
+
+						{typeof validationResult.error !== "undefined" && (
+							<div className="flex items-center gap-2 w-full pt-2 text-sm text-red-600">
+								<InfoIcon size={16} />{" "}
+								{validationResult.error.issues[0].message}
+							</div>
+						)}
 					</TabsContent>
 
 					<TabsContent value="columns" className="space-y-6">
@@ -464,12 +471,6 @@ export function WorkSettings({
 						</DndProvider>
 					</TabsContent>
 				</Tabs>
-
-				{typeof validationResult.error !== "undefined" && (
-					<div className="flex items-center gap-2 w-full pt-2 text-sm text-red-600">
-						<InfoIcon size={16} /> {validationResult.error.issues[0].message}
-					</div>
-				)}
 
 				<div className="flex justify-end gap-2 pt-4 border-t">
 					{name.length > 0 && (
